@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import type { Key } from 'react'
 import { Button, Card, Space, Switch, Tag, Tree, Typography, message } from 'antd'
-import type { TreeDataNode, TreeProps } from 'antd'
 
 const { Paragraph, Text } = Typography
 
-const treeData: TreeDataNode[] = [
+const treeData = [
   {
     title: '权限管理',
     key: 'perm',
@@ -36,10 +34,10 @@ const treeData: TreeDataNode[] = [
  */
 export default function CheckableTree() {
   const [messageApi, contextHolder] = message.useMessage()
-  const [checkedKeys, setCheckedKeys] = useState<Key[]>(['user-read'])
+  const [checkedKeys, setCheckedKeys] = useState(['user-read'])
   const [checkStrictly, setCheckStrictly] = useState(false)
 
-  const onCheck: TreeProps['onCheck'] = (checked) => {
+  const onCheck = (checked) => {
     // checkStrictly 为 false 时，checked 是 { checked, halfChecked } 对象；true 时是数组
     const keys = Array.isArray(checked) ? checked : checked.checked
     setCheckedKeys(keys)

@@ -2,7 +2,7 @@ import { Button, Card, Form, Input, Select, Space, Switch, Tag, Typography, mess
 
 const { Paragraph, Text } = Typography
 
-const districtOptions: Record<string, { label: string; value: string }[]> = {
+const districtOptions = {
   beijing: [
     { label: '朝阳区', value: 'chaoyang' },
     { label: '海淀区', value: 'haidian' },
@@ -51,7 +51,7 @@ export default function DependentForm() {
               <Select
                 placeholder={getFieldValue('city') ? '请选择区县' : '请先选择城市'}
                 disabled={!getFieldValue('city')}
-                options={districtOptions[getFieldValue('city') as string] ?? []}
+                options={districtOptions[getFieldValue('city')] ?? []}
               />
             </Form.Item>
           )}

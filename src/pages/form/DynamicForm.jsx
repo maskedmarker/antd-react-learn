@@ -3,10 +3,6 @@ import { Button, Card, Form, Input, InputNumber, Space, Tag, Typography, message
 
 const { Paragraph, Text } = Typography
 
-interface TeamValues {
-  members: { name: string; age: number }[]
-}
-
 /**
  * 示例 4：动态增删表单项（Form.List）
  * - Form.List 的 name 是数组字段名，fields 是当前列表项
@@ -22,7 +18,7 @@ export default function DynamicForm() {
       extra={<Tag color="blue">Form.List / add / remove</Tag>}
     >
       {contextHolder}
-      <Form<TeamValues>
+      <Form
         name="dynamic"
         initialValues={{ members: [{ name: '张三', age: 18 }] }}
         onFinish={(values) => messageApi.success(`提交成功：${JSON.stringify(values)}`)}

@@ -1,11 +1,9 @@
 import { useState } from 'react'
-import type { Key } from 'react'
 import { Card, Tag, Tree, Typography } from 'antd'
-import type { TreeDataNode, TreeProps } from 'antd'
 
 const { Paragraph, Text } = Typography
 
-const initialTreeData: TreeDataNode[] = [
+const initialTreeData = [
   {
     title: '计划列表',
     key: 'plan',
@@ -39,7 +37,7 @@ const initialTreeData: TreeDataNode[] = [
 export default function DraggableTree() {
   const [treeData, setTreeData] = useState(initialTreeData)
 
-  const onDrop: TreeProps['onDrop'] = (info) => {
+  const onDrop = (info) => {
     const dropKey = info.node.key
     const dragKey = info.dragNode.key
     const dropPos = info.node.pos.split('-')
@@ -47,18 +45,14 @@ export default function DraggableTree() {
     const dropPosition = info.dropPosition - Number(dropPos[dropPos.length - 1])
 
     // 递归遍历树，找到 key 对应的节点后执行 callback
-    const loop = (
-      data: TreeDataNode[],
-      key: Key,
-      callback: (item: TreeDataNode, index: number, arr: TreeDataNode[]) => void,
-    ) => {
+    const loop = (data, key, callback) => {
       for (let i = 0; i < data.length; i++) {
         if (data[i].key === key) {
           callback(data[i], i, data)
           return
         }
         if (data[i].children) {
-          loop(data[i].children!, key, callback)
+          loop(data[i].children, key, callback)
         }
       }
     }
@@ -66,7 +60,7 @@ export default function DraggableTree() {
     const data = [...treeData]
 
     // 1. 从原位置删除被拖拽的节点
-    let dragObj: TreeDataNode | undefined
+    let dragObj
     loop(data, dragKey, (item, index, arr) => {
       arr.splice(index, 1)
       dragObj = item
@@ -78,11 +72,11 @@ export default function DraggableTree() {
       // 2a. 拖到节点上：作为其子节点插入
       loop(data, dropKey, (item) => {
         item.children = item.children || []
-        item.children.unshift(dragObj!)
+        item.children.unshift(dragObj)
       })
     } else {
       // 2b. 拖到间隙：插入到目标节点前面或后面
-      let targetArr: TreeDataNode[] = []
+      let targetArr = []
       let targetIndex = 0
       loop(data, dropKey, (_item, index, arr) => {
         targetArr = arr

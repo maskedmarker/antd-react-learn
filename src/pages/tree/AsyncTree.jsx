@@ -1,21 +1,15 @@
 import { useState } from 'react'
-import type { Key } from 'react'
 import { Card, Tag, Tree, Typography } from 'antd'
-import type { TreeDataNode, TreeProps } from 'antd'
 
 const { Paragraph, Text } = Typography
 
-const initialTreeData: TreeDataNode[] = [
+const initialTreeData = [
   { title: '根目录（点击展开自动加载子节点）', key: 'root' },
   { title: '懒加载目录', key: 'lazy' },
 ]
 
 /** 递归更新：把新子节点挂到 key 对应的节点上 */
-const updateTreeData = (
-  list: TreeDataNode[],
-  key: Key,
-  children: TreeDataNode[],
-): TreeDataNode[] =>
+const updateTreeData = (list, key, children) =>
   list.map((node) => {
     if (node.key === key) {
       return { ...node, children }
@@ -35,8 +29,8 @@ const updateTreeData = (
 export default function AsyncTree() {
   const [treeData, setTreeData] = useState(initialTreeData)
 
-  const onLoadData: TreeProps['loadData'] = ({ key, children }) =>
-    new Promise<void>((resolve) => {
+  const onLoadData = ({ key, children }) =>
+    new Promise((resolve) => {
       if (children) {
         resolve()
         return

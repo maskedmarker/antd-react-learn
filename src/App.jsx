@@ -10,7 +10,7 @@ import TreeDemo from './pages/tree/TreeDemo'
  * - /form  Form 表单演示页
  * - /tree  Tree 树形控件演示页
  *
- * 新增组件演示页时，在这里注册路由即可（菜单见 layouts/BasicLayout.tsx）
+ * 新增组件演示页时，在这里注册路由即可（菜单见 layouts/BasicLayout.jsx）
  */
 export default function App() {
   return (

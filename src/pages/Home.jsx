@@ -34,7 +34,7 @@ export default function Home() {
       <Title level={4}>欢迎 👋</Title>
       <Paragraph type="secondary">
         这是一个用于学习 Ant Design React 组件的 Demo 环境，基于
-        <Text code>Vite + React + TypeScript + antd 5 + React Router</Text>
+        <Text code>Vite + React + JavaScript + antd 5 + React Router</Text>
         搭建。左侧菜单可切换到不同组件的演示页，每个演示页都包含可交互的示例和要点说明。
       </Paragraph>
 
@@ -80,7 +80,7 @@ export default function Home() {
             description: (
               <>
                 在 <Text code>src/pages</Text> 下创建目录和文件，如
-                <Text code> src/pages/table/TableDemo.tsx</Text>
+                <Text code> src/pages/table/TableDemo.jsx</Text>
               </>
             ),
           },
@@ -88,7 +88,7 @@ export default function Home() {
             title: '注册路由',
             description: (
               <>
-                在 <Text code>src/App.tsx</Text> 中添加
+                在 <Text code>src/App.jsx</Text> 中添加
                 <Text code>{' <Route path="table" element={<TableDemo />} />'}</Text>
               </>
             ),
@@ -97,7 +97,7 @@ export default function Home() {
             title: '添加菜单项',
             description: (
               <>
-                在 <Text code>src/layouts/BasicLayout.tsx</Text> 的
+                在 <Text code>src/layouts/BasicLayout.jsx</Text> 的
                 <Text code> menuItems</Text> 中加一项（key 与路由 path 一致）
               </>
             ),
@@ -106,7 +106,7 @@ export default function Home() {
             title: '添加入口卡片（可选）',
             description: (
               <>
-                在 <Text code>src/pages/Home.tsx</Text> 的
+                在 <Text code>src/pages/Home.jsx</Text> 的
                 <Text code> demoList</Text> 中加一条
               </>
             ),

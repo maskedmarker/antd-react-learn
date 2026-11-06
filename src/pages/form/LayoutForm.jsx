@@ -3,8 +3,6 @@ import { Card, Form, Input, InputNumber, Segmented, Tag, Typography } from 'antd
 
 const { Paragraph, Text } = Typography
 
-type LayoutType = 'horizontal' | 'vertical' | 'inline'
-
 /**
  * 示例 2：三种表单布局
  * - horizontal：label 与控件同行（用 labelCol / wrapperCol 栅格控制宽度）
@@ -12,7 +10,7 @@ type LayoutType = 'horizontal' | 'vertical' | 'inline'
  * - inline：所有表单项在同一行内（无 label，适合工具栏筛选场景）
  */
 export default function LayoutForm() {
-  const [layout, setLayout] = useState<LayoutType>('horizontal')
+  const [layout, setLayout] = useState('horizontal')
 
   // horizontal 布局需要设置 label 和控件的栅格宽度，其余布局不需要
   const formLayout =
@@ -26,7 +24,7 @@ export default function LayoutForm() {
       <Segmented
         options={['horizontal', 'vertical', 'inline']}
         value={layout}
-        onChange={(value) => setLayout(value as LayoutType)}
+        onChange={setLayout}
         style={{ marginBottom: 16 }}
       />
       <Form {...formLayout} layout={layout} style={{ maxWidth: 640 }}>

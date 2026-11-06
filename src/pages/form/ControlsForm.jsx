@@ -32,7 +32,7 @@ export default function ControlsForm() {
   const [messageApi, contextHolder] = message.useMessage()
   const [form] = Form.useForm()
 
-  const onFinish = (values: unknown) => {
+  const onFinish = (values) => {
     // 注意：日期字段的值是 dayjs 对象，JSON.stringify 会转成 ISO 字符串
     messageApi.success(`提交成功：${JSON.stringify(values)}`)
   }

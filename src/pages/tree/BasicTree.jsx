@@ -1,12 +1,10 @@
 import { useState } from 'react'
-import type { Key } from 'react'
 import { Card, Tag, Tree, Typography } from 'antd'
-import type { TreeDataNode } from 'antd'
 
 const { Paragraph, Text } = Typography
 
 /** treeData 是 Tree 最常用的数据源：key 必须唯一，children 表示下级节点 */
-const treeData: TreeDataNode[] = [
+const treeData = [
   {
     title: '公司',
     key: 'company',
@@ -35,7 +33,7 @@ const treeData: TreeDataNode[] = [
  * - onSelect 监听节点选中，selectedKeys 控制受控选中
  */
 export default function BasicTree() {
-  const [selectedKeys, setSelectedKeys] = useState<Key[]>([])
+  const [selectedKeys, setSelectedKeys] = useState([])
 
   return (
     <Card title="示例 1：基础树 + 节点选中" extra={<Tag color="green">treeData / onSelect</Tag>}>

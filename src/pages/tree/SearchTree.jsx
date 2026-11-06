@@ -1,11 +1,9 @@
 import { useMemo, useState } from 'react'
-import type { Key } from 'react'
 import { Card, Input, Tag, Tree, Typography } from 'antd'
-import type { TreeDataNode } from 'antd'
 
 const { Paragraph, Text } = Typography
 
-const treeData: TreeDataNode[] = [
+const treeData = [
   {
     title: '前端技术',
     key: 'frontend',
@@ -32,11 +30,11 @@ const treeData: TreeDataNode[] = [
 ]
 
 /** 把树拍平成 [{ key, title }] 列表，用于搜索时计算需要展开的父节点 */
-const generateList = (nodes: TreeDataNode[]): { key: Key; title: string }[] => {
-  const list: { key: Key; title: string }[] = []
-  const walk = (items: TreeDataNode[]) => {
+const generateList = (nodes) => {
+  const list = []
+  const walk = (items) => {
     for (const node of items) {
-      list.push({ key: node.key, title: node.title as string })
+      list.push({ key: node.key, title: node.title })
       if (node.children) walk(node.children)
     }
   }
@@ -45,8 +43,8 @@ const generateList = (nodes: TreeDataNode[]): { key: Key; title: string }[] => {
 }
 
 /** 查找 key 的父节点 key（用于自动展开） */
-const getParentKey = (key: Key, tree: TreeDataNode[]): Key | undefined => {
-  let parentKey: Key | undefined
+const getParentKey = (key, tree) => {
+  let parentKey
   for (const node of tree) {
     if (node.children) {
       if (node.children.some((item) => item.key === key)) {
@@ -67,17 +65,17 @@ const getParentKey = (key: Key, tree: TreeDataNode[]): Key | undefined => {
  */
 export default function SearchTree() {
   const [searchValue, setSearchValue] = useState('')
-  const [expandedKeys, setExpandedKeys] = useState<Key[]>([])
+  const [expandedKeys, setExpandedKeys] = useState([])
   const [autoExpandParent, setAutoExpandParent] = useState(true)
 
   const dataList = useMemo(() => generateList(treeData), [])
 
-  const onSearch = (value: string) => {
+  const onSearch = (value) => {
     // 找出所有标题匹配关键字的节点，展开它们的父级
     const newExpandedKeys = dataList
       .filter((item) => item.title.includes(value))
       .map((item) => getParentKey(item.key, treeData))
-      .filter((key): key is Key => key !== undefined)
+      .filter((key) => key !== undefined)
     setExpandedKeys(newExpandedKeys)
     setSearchValue(value)
     setAutoExpandParent(true)
@@ -85,9 +83,9 @@ export default function SearchTree() {
 
   // 高亮标题中匹配的关键字
   const highlightTreeData = useMemo(() => {
-    const loop = (data: TreeDataNode[]): TreeDataNode[] =>
+    const loop = (data) =>
       data.map((item) => {
-        const strTitle = item.title as string
+        const strTitle = item.title
         const index = strTitle.indexOf(searchValue)
         const beforeStr = strTitle.substring(0, index)
         const afterStr = strTitle.slice(index + searchValue.length)

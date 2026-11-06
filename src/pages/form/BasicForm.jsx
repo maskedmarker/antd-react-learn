@@ -2,13 +2,6 @@ import { Button, Card, Checkbox, Form, Input, Space, Tag, Typography, message } 
 
 const { Paragraph, Text } = Typography
 
-interface RegisterValues {
-  username: string
-  password: string
-  confirm: string
-  remember: boolean
-}
-
 /**
  * 示例 1：基础用法 + 校验规则
  * - Form.Item 通过 name 绑定字段，rules 定义校验规则
@@ -19,9 +12,9 @@ interface RegisterValues {
 export default function BasicForm() {
   // antd v5 推荐用 useMessage 获取带上下文的 message 实例（静态调用会丢失主题上下文）
   const [messageApi, contextHolder] = message.useMessage()
-  const [form] = Form.useForm<RegisterValues>()
+  const [form] = Form.useForm()
 
-  const onFinish = (values: RegisterValues) => {
+  const onFinish = (values) => {
     messageApi.success(`提交成功：${JSON.stringify(values)}`)
   }
 
@@ -31,7 +24,7 @@ export default function BasicForm() {
       extra={<Tag color="blue">rules / onFinish / valuePropName</Tag>}
     >
       {contextHolder}
-      <Form<RegisterValues>
+      <Form
         form={form}
         name="basic"
         labelCol={{ span: 4 }}
