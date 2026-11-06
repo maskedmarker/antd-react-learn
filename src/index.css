@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+}
+
+/* 侧边栏顶部的 Logo 文字 */
+.logo {
+  height: 32px;
+  margin: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1677ff;
+}
